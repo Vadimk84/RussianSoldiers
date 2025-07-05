@@ -45,11 +45,11 @@
    download: true,
    header: true,
    complete: function(results) {
-    // Filter rows where every cell is NOT empty or whitespace only
-    const data = results.data.filter(row =>
-      Object.values(row).every(cell => cell.trim() !== "")
+   // keep row if at least one cell has data (not empty or whitespace)
+      const data = results.data.filter(row =>
+      Object.values(row).some(cell => cell.trim() !== "")
     );
-
+    
     if (data.length === 0) {
       document.getElementById('table-container').innerText = 'No complete data rows found.';
       return;
