@@ -41,34 +41,39 @@
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 
   <script>
-    Papa.parse('table.csv', {
-      download: true,
-      header: true,
-      complete: function(results) {
-        const data = results.data;
-        if (data.length === 0) {
-          document.getElementById('table-container').innerText = 'No data found.';
-          return;
-        }
+   Papa.parse('Table.csv', {
+   download: true,
+   header: true,
+   complete: function(results) {
+    // Filter rows where every cell is NOT empty or whitespace only
+    const data = results.data.filter(row =>
+      Object.values(row).every(cell => cell.trim() !== "")
+    );
 
-        let html = '<table><thead><tr>';
-        Object.keys(data[0]).forEach(col => {
-          html += `<th>${col}</th>`;
-        });
-        html += '</tr></thead><tbody>';
+    if (data.length === 0) {
+      document.getElementById('table-container').innerText = 'No complete data rows found.';
+      return;
+    }
 
-        data.forEach(row => {
-          html += '<tr>';
-          Object.values(row).forEach(cell => {
-            html += `<td>${cell}</td>`;
-          });
-          html += '</tr>';
-        });
-
-        html += '</tbody></table>';
-        document.getElementById('table-container').innerHTML = html;
-      }
+    let html = '<table><thead><tr>';
+    Object.keys(data[0]).forEach(col => {
+      html += `<th>${col}</th>`;
     });
+    html += '</tr></thead><tbody>';
+
+    data.forEach(row => {
+      html += '<tr>';
+      Object.values(row).forEach(cell => {
+        html += `<td>${cell}</td>`;
+      });
+      html += '</tr>';
+    });
+
+    html += '</tbody></table>';
+    document.getElementById('table-container').innerHTML = html;
+    }
+  });
+
   </script>
 
 </body>
