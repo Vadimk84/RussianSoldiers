@@ -12,10 +12,12 @@
     }
 
     img {
-      max-width: 1600px;
+      max-width: 800px;
       width: 100%;
       height: auto;
       margin-bottom: 20px;
+      cursor: zoom-in;
+      border: none;
     }
 
     a {
@@ -31,6 +33,25 @@
     a:hover {
       background-color: #005fa3;
     }
+
+    /* Lightbox (fullscreen image) styling */
+    #overlay {
+      position: fixed;
+      display: none;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background-color: rgba(0, 0, 0, 0.85);
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    #overlay img {
+      max-width: 95%;
+      max-height: 95%;
+      cursor: zoom-out;
+      border: none;
+    }
   </style>
 </head>
 <body>
@@ -38,15 +59,28 @@
   <h1>Welcome to My GitHub Pages Site</h1>
   <p>This site contains a CSV data file about soldiers and their status.</p>
 
-  <!-- PNG image -->
-  <a href="Graph.png" target="_blank">
-    <img src="Graph.png" alt="Descriptive image">
-  </a>
+  <!-- Small image with zoom on click -->
+  <img src="Graph.png" alt="Descriptive image" onclick="openImage()" />
 
-  <!-- Link to view CSV (not download) -->
+  <!-- Lightbox overlay -->
+  <div id="overlay" onclick="closeImage()">
+    <img src="Graph.png" alt="Full-size image" />
+  </div>
+
+  <!-- Link to CSV -->
   <p>
     <a href="Table.csv">📄 View CSV in Browser</a>
   </p>
+
+  <script>
+    function openImage() {
+      document.getElementById("overlay").style.display = "flex";
+    }
+
+    function closeImage() {
+      document.getElementById("overlay").style.display = "none";
+    }
+  </script>
 
 </body>
 </html>
