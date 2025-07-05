@@ -41,39 +41,47 @@
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 
   <script>
-   Papa.parse('Table.csv', {
-   download: true,
-   header: true,
-   complete: function(results) {
-   // keep row if at least one cell has data (not empty or whitespace)
-      const data = results.data.filter(row =>
-      Object.values(row).some(cell => cell.trim() !== "")
-    );
-    
-    if (data.length === 0) {
-      document.getElementById('table-container').innerText = 'No complete data rows found.';
-      return;
-    }
+    Papa.parse('Table.csv', {
+      download: true,
+      header: true,
+      complete: function(results) {
+        console.log("Parsed Results:", results); // Optional: for debugging
 
-    let html = '<table><thead><tr>';
-    Object.keys(data[0]).forEach(col => {
-      html += `<th>${col}</th>`;
+        // Keep only rows with at least one non-empty cell
+        const data = results.data.filter(row =>
+          Object.values(row).some(cell => cell.trim() !== "")
+        );
+
+        if (data.length === 0) {
+          document.getElementById('table-container').innerText = 'No complete data rows found.';
+          return;
+        }
+
+        // Build HTML table
+        let html = '<table><thead><tr>';
+        html += '<th>#</th>'; // Add index column header
+        Object.keys(data[0]).forEach(col => {
+          html += `<th>${col}</th>`;
+        });
+        html += '</tr></thead><tbody>';
+
+        data.forEach((row, i) => {
+          html += '<tr>';
+          html += `<td>${i + 1}</td>`; // Add index number (starting from 1)
+          Object.values(row).forEach(cell => {
+            html += `<td>${cell}</td>`;
+          });
+          html += '</tr>';
+        });
+
+        html += '</tbody></table>';
+        document.getElementById('table-container').innerHTML = html;
+      },
+      error: function(err) {
+        console.error("CSV Load Error:", err);
+        document.getElementById('table-container').innerText = 'Failed to load CSV data.';
+      }
     });
-    html += '</tr></thead><tbody>';
-
-    data.forEach(row => {
-      html += '<tr>';
-      Object.values(row).forEach(cell => {
-        html += `<td>${cell}</td>`;
-      });
-      html += '</tr>';
-    });
-
-    html += '</tbody></table>';
-    document.getElementById('table-container').innerHTML = html;
-    }
-  });
-
   </script>
 
 </body>
