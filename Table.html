@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Data Table</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 40px;
+      background-color: #f8f8f8;
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 30px;
+    }
+
+    table {
+      margin: 0 auto;
+      width: 95%;
+      border-collapse: collapse;
+      font-size: 16px;
+    }
+
+    th, td {
+      padding: 12px;
+      border: 1px solid #ccc;
+      text-align: left;
+    }
+
+    thead {
+      background-color: #eaeaea;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Soldier Status Table</h1>
+  <div id="table-container">Loading data...</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+
+  <script>
+    Papa.parse('Table.csv', {
+      download: true,
+      header: true,
+      complete: function(results) {
+        const data = results.data;
+        if (data.length === 0) {
+          document.getElementById('table-container').innerText = 'No data found.';
+          return;
+        }
+
+        let html = '<table><thead><tr>';
+        Object.keys(data[0]).forEach(col => {
+          html += `<th>${col}</th>`;
+        });
+        html += '</tr></thead><tbody>';
+
+        data.forEach(row => {
+          html += '<tr>';
+          Object.values(row).forEach(cell => {
+            html += `<td>${cell}</td>`;
+          });
+          html += '</tr>';
+        });
+
+        html += '</tbody></table>';
+        document.getElementById('table-container').innerHTML = html;
+      }
+    });
+  </script>
+
+</body>
+</html>
