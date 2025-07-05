@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>My Data Page</title>
+  <meta charset="UTF-8" />
+  <title>Welcome</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -10,31 +10,13 @@
       padding: 40px;
       background-color: #f4f4f4;
     }
-
     img {
       max-width: 1600px;
       width: 100%;
       height: auto;
-      margin-bottom: 20px;
       cursor: zoom-in;
-      border: none;
+      margin-bottom: 30px;
     }
-
-    a {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 10px 20px;
-      background-color: #0077cc;
-      color: white;
-      text-decoration: none;
-      border-radius: 5px;
-    }
-
-    a:hover {
-      background-color: #005fa3;
-    }
-
-    /* Lightbox (fullscreen image) styling */
     #overlay {
       position: fixed;
       display: none;
@@ -45,38 +27,46 @@
       align-items: center;
       z-index: 9999;
     }
-
     #overlay img {
       max-width: 95%;
       max-height: 95%;
       cursor: zoom-out;
-      border: none;
+    }
+    a.button {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #0077cc;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+    a.button:hover {
+      background-color: #005fa3;
     }
   </style>
 </head>
 <body>
 
   <h1>Welcome to My GitHub Pages Site</h1>
-  <p>This site contains a CSV data file about soldiers and their status.</p>
+  <p>This site contains an image and a separate CSV data table.</p>
 
-  <!-- Small image with zoom on click -->
-  <img src="Graph.png" alt="Descriptive image" onclick="openImage()" />
+  <img src="Graph.png" alt="Graph Image" onclick="openImage()" />
 
-  <!-- Lightbox overlay -->
+  <!-- Fullscreen overlay -->
   <div id="overlay" onclick="closeImage()">
-    <img src="Graph.png" alt="Full-size image" />
+    <img src="Graph.png" alt="Full-size Graph" />
   </div>
 
-  <!-- Link to CSV -->
+  <!-- Link to open table.html -->
   <p>
-    <a href="Table.csv">📄 View CSV in Browser</a>
+    <a href="table.html" class="button">📄 View Data Table</a>
   </p>
 
   <script>
     function openImage() {
       document.getElementById("overlay").style.display = "flex";
     }
-
     function closeImage() {
       document.getElementById("overlay").style.display = "none";
     }
