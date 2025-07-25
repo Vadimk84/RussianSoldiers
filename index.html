@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>Welcome</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -44,6 +45,11 @@
     a.button:hover {
       background-color: #005fa3;
     }
+    canvas {
+      max-width: 1200px;
+      width: 100%;
+      margin: 40px auto;
+    }
   </style>
 </head>
 <body>
@@ -63,6 +69,8 @@
 
   <img src="Graph.png" alt="Graph Image" onclick="openImage()" />
 
+  <canvas id="casualtyChart"></canvas>
+
   <!-- Fullscreen overlay -->
   <div id="overlay" onclick="closeImage()">
     <img src="Graph.png" alt="Full-size Graph" />
@@ -76,6 +84,61 @@
       document.getElementById("overlay").style.display = "none";
     }
   </script>
+
+  <script>
+  const ctx = document.getElementById('casualtyChart').getContext('2d');
+
+  const labels = [
+    "2022 Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec",
+    "2023 Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec",
+    "2024 Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec",
+    "2025 Jan", "Feb", "Mar", "Apr", "May", "Jun"
+  ];
+
+  const data = [
+    377, 310, 388, 736, 705, 774, 802, 1311, 1344, 1217,
+    1514, 2517, 3210, 2202, 2366, 2387, 2076, 2324, 2029, 2064, 2799, 2438,
+    2705, 3417, 3788, 3395, 3176, 3595, 4519, 4705, 4893, 5477, 6164, 6579,
+    5503, 6034, 5086, 4644, 4907, 4105
+  ];
+
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: 'Monthly Casualties',
+        data: data,
+        borderColor: '#cc0000',
+        backgroundColor: 'rgba(204, 0, 0, 0.2)',
+        fill: true,
+        tension: 0.3,
+        pointRadius: 3,
+        pointHoverRadius: 6
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { display: true },
+        title: {
+          display: true,
+          text: 'Russian Military Casualties Over Time'
+        }
+      },
+      scales: {
+        x: {
+          title: { display: true, text: 'Month' },
+          ticks: { maxRotation: 90, minRotation: 45 }
+        },
+        y: {
+          beginAtZero: true,
+          title: { display: true, text: 'Casualties' }
+        }
+      }
+    }
+  });
+</script>
 
 </body>
 </html>
