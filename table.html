@@ -5,6 +5,19 @@
   <title>Data Table</title>
   <style>
     body {
+
+      a.button {
+        display: inline-block;
+        margin-top: 20px;
+        margin-left: 20 px;
+        margin-right: 20px;
+        padding: 10px 20px;
+        background-color: #0077cc;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+      }
+      
       font-family: Arial, sans-serif;
       padding: 40px;
       background-color: #f8f8f8;
@@ -34,6 +47,13 @@
   </style>
 </head>
 <body>
+
+  <nav style="text-align: right; "margin-bottom: 50px;">
+    <a href="index.html" class="button">Home</a>
+    <a href="table.html" class="button">Data Table</a>
+    <a href="sources.html" class="button">Sources</a>
+    <a href="about.html" class="button">About</a>
+  </nav>
 
   <h1>Soldier Status Table</h1>
   <div id="table-container">Loading data...</div>
@@ -86,3 +106,4 @@
 
 </body>
 </html>
+
