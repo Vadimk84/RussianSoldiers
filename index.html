@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <title>Welcome</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -109,8 +110,8 @@
       datasets: [{
         label: 'Monthly Casualties',
         data: data,
-        borderColor: '#cc0000',
-        backgroundColor: 'rgba(204, 0, 0, 0.2)',
+        borderColor: '#0066cc',
+        backgroundColor: 'rgba(0, 102, 204, 0.5)',
         fill: true,
         tension: 0.3,
         pointRadius: 3,
@@ -124,6 +125,13 @@
         title: {
           display: true,
           text: 'Russian Military Casualties Over Time'
+        },
+        datalabels: {
+          anchor: 'end',
+          align: 'end',
+          color: '#003366',
+          font: { weight: 'bold' },
+          formatter: value => value.toLocaleString()
         }
       },
       scales: {
@@ -136,10 +144,12 @@
           title: { display: true, text: 'Casualties' }
         }
       }
-    }
+    },
+    plugins: [ChartDataLabels]
   });
 </script>
 
 </body>
 </html>
+
 
