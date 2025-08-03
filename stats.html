@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>About</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 40px;
+      background-color: #f4f4f4;
+    }
+    a.button {
+      display: inline-block;
+      margin-top: 20px;
+      margin-left: 20 px;
+      margin-right: 20px;
+      padding: 10px 20px;
+      background-color: #0077cc;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+    a.button:hover {
+      background-color: #005fa3;
+    }
+  </style>
+</head>
+<body>
+  
+  <nav style="text-align: right; "margin-bottom: 50px;">
+    <a href="index.html" class="button">Home</a>
+    <a href="table.html" class="button">Data Table</a>
+    <a href="stats.html" class="button">Stats</a>
+    <a href="log.html" class="button">Log</a>
+    <a href="about.html" class="button">About</a>
+  </nav>
+
+  <h2 style="margin-bottom: 50px;">Different stats and stories:</h1>
+  
+  <p style="margin-bottom: 30px;">Casualties by big cities:</p>
+
+  <img src="Stats.png" alt="Graph Image" onclick="openImage()" />  
+
+  <!-- Fullscreen overlay -->
+  <div id="overlay" onclick="closeImage()">
+    <img src="Stats.png" alt="Full-size Graph" />
+  </div>
+
+  <script>
+    function openImage() {
+      document.getElementById("overlay").style.display = "flex";
+    }
+    function closeImage() {
+      document.getElementById("overlay").style.display = "none";
+    }
+  </script>
+    
+</body>
+</html>
+
