@@ -36,7 +36,7 @@
     a.button {
       display: inline-block;
       margin-top: 20px;
-      margin-left: 20 px;
+      margin-left: 20px;
       margin-right: 20px;
       padding: 10px 20px;
       background-color: #0077cc;
@@ -62,28 +62,32 @@
 
   <h2 style="margin-bottom: 50px;">Different stats:</h2>
 
-  <img src="Graph.png" alt="Graph Image" onclick="openImage()" />
+  <img src="Graph.png" alt="Graph Image" onclick="openImage(this.src)" />
   
   <p style="margin-bottom: 30px;">Casualties by big cities:</p>
 
-  <img src="KilledByCity.png" alt="Graph Image" onclick="openImage()" />  
+  <img src="KilledByCity.png" alt="Graph Image" onclick="openImage(this.src)" />
 
   <!-- Fullscreen overlay -->
-  <div id="overlay" onclick="closeImage()">
-    <img src="Stats.png" alt="Full-size Graph" />
-  </div>
 
-  <script>
-    function openImage() {
-      document.getElementById("overlay").style.display = "flex";
-    }
-    function closeImage() {
-      document.getElementById("overlay").style.display = "none";
-    }
-  </script>
+<div id="overlay" onclick="closeImage()">
+  <img id="overlayImg" src="" alt="Full-size Graph" />
+</div>
+
+<script>
+function openImage(src) {
+  document.getElementById("overlayImg").src = src;
+  document.getElementById("overlay").style.display = "flex";
+}
+function closeImage() {
+  document.getElementById("overlay").style.display = "none";
+}
+</script>
+
     
 </body>
 </html>
+
 
 
 
